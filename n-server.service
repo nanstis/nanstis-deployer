@@ -1,0 +1,14 @@
+[Unit]
+Description=nanstis.ch
+After=network.target
+
+[Service]
+User=nanstis
+WorkingDirectory=/var/www/deploy/n-server/dist
+Environment=NODE_ENV=production
+ExecStart=/home/nanstis/.nvm/versions/node/v20.0.0/bin/node index.js
+Restart=always
+SyslogIdentifier=nanstis-api
+
+[Install]
+WantedBy=multi-user.target

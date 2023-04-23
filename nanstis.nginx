@@ -1,0 +1,46 @@
+server {
+    listen 80;
+    listen 443;
+
+    ssl on;
+    ssl_protocols TLSv1 TLSv1.2;
+    ssl_ciphers ECDH+AESGCM:ECDH+AES256:!aNULL:!MD5:!DSS:!DH:!AES128;
+    ssl_ecdh_curve secp384r1;
+    ssl_prefer_server_ciphers on;
+    ssl_certificate     /etc/ssl/certs/www.nanstis.ch.chained.crt;
+    ssl_certificate_key /etc/ssl/private/www.nanstis.ch.key;
+
+    add_header Access-Control-Allow-Origin *;
+    client_max_body_size 10000M;
+    client_body_timeout 1000s;
+
+    root /var/www/deploy/n-client/dist;
+    index index.html;
+    server_name nanstis.ch;
+
+    location / {
+        try_files $uri $uri/ @rewrites;
+    }
+
+    location @rewrites {
+          rewrite ^(.+)$ /index.html last;
+    }
+
+    location ~* .(?:ico|css|js|gif|jpe?g|png)$ {
+        expires max;
+        add_header Pragma public;
+        add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+    }
+
+    location /api {
+        proxy_pass http://localhost:3000/api;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    location ~ /\.ht {
+            deny all;
+    }
+}
