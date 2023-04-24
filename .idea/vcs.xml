@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
-    <mapping directory="$PROJECT_DIR$/old/Markdown" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/old/environment" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/old/json-server" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/old/library" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/old/nanstis-client" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/old/openai-api" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/old/web-script" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
 </project>
